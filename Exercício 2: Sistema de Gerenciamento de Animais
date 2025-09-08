@@ -1,0 +1,101 @@
+package exercicio2;
+
+import java.util.ArrayList;
+
+public class Exercicio2 {
+
+
+    public static void main(String[] args) {
+            
+        ArrayList<Animal> animais = new ArrayList<>();
+
+        // Adicionando diferentes tipos de animais
+        animais.add(new Cachorro());
+        animais.add(new Gato());
+        animais.add(new Passaro());
+
+        // Usando polimorfismo para chamar métodos
+        for (Animal animal : animais) {
+            animal.emitirSom();
+            animal.mover();
+            System.out.println("-------------------------");
+        }
+    }
+}
+
+//Classe animal
+package exercicio2;
+
+
+public abstract class Animal {
+    // Método abstrato para emitir som
+    public abstract void emitirSom();
+
+    // Método abstrato para movimento
+    public abstract void mover();
+}
+    
+//Classe cachorro
+package exercicio2;
+
+public class Cachorro extends Animal {
+
+    @Override
+    public void emitirSom() {
+        System.out.println("O cachorro está latindo: Au Au!");
+    }
+
+    @Override
+    public void mover() {
+        System.out.println("O cachorro está correndo!");
+    }
+}
+
+package exercicio2;
+
+public class Gato extends Animal {
+
+    @Override
+    public void emitirSom() {
+        System.out.println("O gato está miando: Miau!");
+    }
+
+    @Override
+    public void mover() {
+        System.out.println("O gato está andando silenciosamente!");
+    }
+}
+  //Classe gato
+  
+package exercicio2;
+
+public class Gato extends Animal {
+
+    @Override
+    public void emitirSom() {
+        System.out.println("O gato está miando: Miau!");
+    }
+
+    @Override
+    public void mover() {
+        System.out.println("O gato está andando silenciosamente!");
+    }
+}
+    
+//Classe passaro
+
+package exercicio2;
+
+public class Passaro extends Animal {
+
+    @Override
+    public void emitirSom() {
+        System.out.println("O pássaro está cantando: Piu Piu!");
+    }
+
+    @Override
+    public void mover() {
+        System.out.println("O pássaro está voando!");
+    }
+}
+
