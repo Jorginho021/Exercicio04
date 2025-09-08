@@ -1,0 +1,92 @@
+package exercicio5;
+
+import java.util.ArrayList;
+
+
+public class Exercicio5 {
+
+    
+    public static void main(String[] args) {
+        
+     // Lista polimórfica de funcionários
+        ArrayList<Funcionario> funcionarios = new ArrayList<>();
+
+        // Criando funcionários
+        funcionarios.add(new Gerente("Carlos", 5000.0, 2000.0));          // Salário fixo + bônus
+        funcionarios.add(new Programador("Ana", 3000.0, 50, 30.0));       // Salário fixo + horas extras
+        funcionarios.add(new Programador("Lucas", 2500.0, 80, 25.0));     // Outro programador
+
+        // Calculando salários com polimorfismo
+        for (Funcionario funcionario : funcionarios) {
+            System.out.println("Funcionário: " + funcionario.getNome());
+            System.out.println("Salário Base: R$" + funcionario.getSalarioBase());
+            System.out.println("Salário Total: R$" + funcionario.calcularSalario());
+            System.out.println("-------------------------");
+        }
+    }
+}
+
+//ClasseFuncionario
+package exercicio5;
+
+
+public abstract class Funcionario {
+    protected String nome;
+    protected double salarioBase;
+
+    public Funcionario(String nome, double salarioBase) {
+        this.nome = nome;
+        this.salarioBase = salarioBase;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public double getSalarioBase() {
+        return salarioBase;
+    }
+
+    // Método abstrato que cada tipo de funcionário implementará de forma diferente
+    public abstract double calcularSalario();
+}
+
+//Classe Gerente
+package exercicio5;
+
+public class Gerente extends Funcionario {
+    private double bonus;
+
+    public Gerente(String nome, double salarioBase, double bonus) {
+        super(nome, salarioBase);
+        this.bonus = bonus;
+    }
+
+    @Override
+    public double calcularSalario() {
+        return salarioBase + bonus;
+    }
+}
+
+//ClasseProgramador
+
+package exercicio5;
+
+
+public class Programador extends Funcionario {
+    private int horasTrabalhadas;
+    private double valorPorHora;
+
+    public Programador(String nome, double salarioBase, int horasTrabalhadas, double valorPorHora) {
+        super(nome, salarioBase);
+        this.horasTrabalhadas = horasTrabalhadas;
+        this.valorPorHora = valorPorHora;
+    }
+
+    @Override
+    public double calcularSalario() {
+        return salarioBase + (horasTrabalhadas * valorPorHora);
+    }
+}
+    
+
