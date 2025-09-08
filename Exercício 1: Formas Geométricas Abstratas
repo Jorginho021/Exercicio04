@@ -1,0 +1,85 @@
+package exercicio1;
+
+
+public class Exercicio1 {
+
+    
+    public static void main(String[] args) {
+      
+         // Polimorfismo: referência do tipo FormaGeometrica
+        FormaGeometrica[] formas = new FormaGeometrica[3];
+        
+        formas[0] = new Circulo(5);       // raio = 5
+        formas[1] = new Retangulo(4, 6);  // largura = 4, altura = 6
+        formas[2] = new Triangulo(3, 8);  // base = 3, altura = 8
+
+        for (FormaGeometrica forma : formas) {
+            System.out.println("Área: " + forma.calcularArea());
+        }
+    }
+}
+
+//Classe FormaGeometrica
+package  exercicio1;
+
+public abstract  class FormaGeometrica {
+  
+    public abstract double calcularArea();
+}
+
+//Classe Triangulopackage exercicio1;
+
+
+public class Triangulo extends FormaGeometrica {
+    private double base;
+    private double altura;
+
+    public Triangulo(double base, double altura) {
+        this.base = base;
+        this.altura = altura;
+    }
+
+    @Override
+    public double calcularArea() {
+        return (base * altura) / 2;
+    }
+}
+    
+
+//Classe retangulo 
+
+package exercicio1;
+
+
+public class Retangulo extends FormaGeometrica {
+
+    private double largura;
+    private double altura;
+
+    public Retangulo(double largura, double altura) {
+        this.largura = largura;
+        this.altura = altura;
+    }
+
+    @Override
+    public double calcularArea() {
+        return largura * altura;
+    }
+}
+//classe circulo
+package exercicio1;
+
+public class Circulo extends FormaGeometrica {
+    
+   private double raio;
+
+    public Circulo(double raio) {
+        this.raio = raio;
+    }
+
+    @Override
+    public double calcularArea() {
+        return Math.PI * raio * raio;
+    }
+}
+
