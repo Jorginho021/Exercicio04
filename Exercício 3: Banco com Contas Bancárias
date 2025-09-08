@@ -1,0 +1,122 @@
+package exercicip3;
+
+import java.util.ArrayList;
+
+public class Exercicip3 {
+
+    public static void main(String[] args) {
+        
+          // Criando uma lista de contas bancárias
+        ArrayList<ContaBancaria> contas = new ArrayList<>();
+
+        // Adicionando contas diferentes
+        contas.add(new ContaCorrente("João", 1000.0));
+        contas.add(new ContaPoupanca("Maria", 2000.0));
+
+        // Operações nas contas usando polimorfismo
+        for (ContaBancaria conta : contas) {
+            System.out.println("\nTitular: " + conta.getTitular());
+            System.out.println("Saldo inicial: R$" + conta.getSaldo());
+
+            // Depósito
+            conta.depositar(500);
+
+            // Saque
+            conta.sacar(300);
+
+            // Saldo atualizado
+            System.out.println("Saldo atual: R$" + conta.getSaldo());
+            System.out.println("-------------------------");
+        }
+    }
+}
+
+//Classe ContaBancaria
+package exercicip3;
+
+public abstract class ContaBancaria {
+    protected String titular;
+    protected double saldo;
+
+    public ContaBancaria(String titular, double saldoInicial) {
+        this.titular = titular;
+        this.saldo = saldoInicial;
+    }
+
+    public String getTitular() {
+        return titular;
+    }
+
+    public double getSaldo() {
+        return saldo;
+    }
+
+    // Métodos abstratos
+    public abstract void sacar(double valor);
+    public abstract void depositar(double valor);
+}
+
+//Classe ContaCorrente
+package exercicip3;
+
+
+public class ContaCorrente extends ContaBancaria {
+
+    public ContaCorrente(String titular, double saldoInicial) {
+        super(titular, saldoInicial);
+    }
+
+    @Override
+    public void sacar(double valor) {
+        if (valor > 0 && saldo >= valor) {
+            saldo -= valor;
+            System.out.println("Saque de R$" + valor + " realizado com sucesso na Conta Corrente de " + titular);
+        } else {
+            System.out.println("Saldo insuficiente para saque na Conta Corrente de " + titular);
+        }
+    }
+
+    @Override
+    public void depositar(double valor) {
+        if (valor > 0) {
+            saldo += valor;
+            System.out.println("Depósito de R$" + valor + " realizado com sucesso na Conta Corrente de " + titular);
+        } else {
+            System.out.println("Valor inválido para depósito!");
+        }
+    }
+    
+}
+
+//ContaPupanca
+
+package exercicip3;
+
+public class ContaPoupanca extends ContaBancaria {
+
+    public ContaPoupanca(String titular, double saldoInicial) {
+        super(titular, saldoInicial);
+    }
+
+    @Override
+    public void sacar(double valor) {
+        if (valor > 0 && saldo >= valor) {
+            saldo -= valor;
+            System.out.println("Saque de R$" + valor + " realizado com sucesso na Conta Poupança de " + titular);
+        } else {
+            System.out.println("Saldo insuficiente para saque na Conta Poupança de " + titular);
+        }
+    }
+
+    @Override
+    public void depositar(double valor) {
+        if (valor > 0) {
+            saldo += valor;
+            System.out.println("Depósito de R$" + valor + " realizado com sucesso na Conta Poupança de " + titular);
+        } else {
+            System.out.println("Valor inválido para depósito!");
+        }
+    }
+}
+    
+
