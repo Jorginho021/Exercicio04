@@ -1,0 +1,82 @@
+package exercicio4;
+
+import java.util.ArrayList;
+
+
+public class Exercicio4 {
+
+    public static void main(String[] args) {
+        
+           // Criando uma lista de pagamentos
+        ArrayList<Pagamento> pagamentos = new ArrayList<>();
+
+        // Adicionando diferentes formas de pagamento
+        pagamentos.add(new PagamentoCartaoCredito(1000.0, 0.05)); // 5% de juros
+        pagamentos.add(new PagamentoBoleto(1000.0, 0.10));        // 10% de desconto
+
+        // Usando polimorfismo para calcular os valores
+        for (Pagamento pagamento : pagamentos) {
+            System.out.println("Valor base: R$" + pagamento.getValorBase());
+            System.out.println("Valor final a pagar: R$" + pagamento.calcularValor());
+            System.out.println("-------------------------");
+        }
+    }
+}
+
+//Classe pagamento 
+package exercicio4;
+
+
+public abstract class Pagamento {
+    protected double valorBase;
+
+    public Pagamento(double valorBase) {
+        this.valorBase = valorBase;
+    }
+
+    public double getValorBase() {
+        return valorBase;
+    }
+
+    // Método abstrato
+    public abstract double calcularValor();
+}
+    
+//Classe PagamentoCartaoCredito
+package exercicio4;
+
+
+public class PagamentoCartaoCredito extends Pagamento {
+    private double taxaJuros; // Ex: 5% = 0.05
+
+    public PagamentoCartaoCredito(double valorBase, double taxaJuros) {
+        super(valorBase);
+        this.taxaJuros = taxaJuros;
+    }
+
+    @Override
+    public double calcularValor() {
+        return valorBase + (valorBase * taxaJuros);
+    }
+}
+    
+
+//CLasse PagamentoBoleto
+package exercicio4;
+
+
+public class PagamentoBoleto extends Pagamento {
+    private double desconto; // Ex: 10% = 0.10
+
+    public PagamentoBoleto(double valorBase, double desconto) {
+        super(valorBase);
+        this.desconto = desconto;
+    }
+
+    @Override
+    public double calcularValor() {
+        return valorBase - (valorBase * desconto);
+    }
+}
+
+
